@@ -1,5 +1,4 @@
-from flask import Flask, request, jsonify, Response
-from bson import json_util, ObjectId
+from flask import Flask, request
 from email.message import EmailMessage
 import smtplib
 
