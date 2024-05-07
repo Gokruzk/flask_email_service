@@ -20,7 +20,7 @@ def send_message(desde, para):
     email.set_content(msg)
 
     smtp = smtplib.SMTP_SSL('smtp.gmail.com')
-    smtp.login(desde, 'ltbj rfru hmrz hwpi')
+    smtp.login(desde, 'rnkd lcbm yxbt xwnc')
     smtp.sendmail(desde, para, email.as_string())
     smtp.quit()
 
