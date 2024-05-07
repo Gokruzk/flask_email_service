@@ -1,9 +1,12 @@
+import os
 from flask import Flask, request
 from email.message import EmailMessage
 import smtplib
 
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = os.getenv('GOOGLE_PSW')
+gpsw = app.config['SECRET_KEY']
 
 
 def send_message(desde, para):
@@ -20,7 +23,7 @@ def send_message(desde, para):
     email.set_content(msg)
 
     smtp = smtplib.SMTP_SSL('smtp.gmail.com')
-    smtp.login(desde, 'rnkd lcbm yxbt xwnc')
+    smtp.login(desde, f'{gpsw}')
     smtp.sendmail(desde, para, email.as_string())
     smtp.quit()
 
