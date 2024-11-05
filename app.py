@@ -1,17 +1,15 @@
-import os
+from os import getenv
 from flask import Flask, request
 from email.message import EmailMessage
 import smtplib
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv('GOOGLE_PSW')
+app.config['SECRET_KEY'] = getenv('GOOGLE_PSW')
 gpsw = app.config['SECRET_KEY']
 
 
-def send_message(desde, para):
-    # Welcome message
-    msg = f'Welcome {para}'
+def send_message(desde, para, msg):
 
     # email instance
     email = EmailMessage()
@@ -19,7 +17,7 @@ def send_message(desde, para):
     # email config
     email['From'] = desde
     email['To'] = para
-    email['Subject'] = 'Welcome'
+    email['Subject'] = 'Bienvenida'
     email.set_content(msg)
 
     smtp = smtplib.SMTP_SSL('smtp.gmail.com')
@@ -34,8 +32,10 @@ def send_mail():
     datos = request.json
     desde = 'nigelljama@gmail.com'
     para = datos['email']
+    # Welcome message
+    msg = datos['message']
     # sending email
-    send_message(desde, para)
+    send_message(desde, para, msg)
     return {'message': 'sent'}
 
 
